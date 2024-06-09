@@ -1,0 +1,172 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #000000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #dad3be;
+}
+
+.Header-container {
+  position: relative; /* Set the container as a reference for absolute positioning */
+  display: flex; /* Menggunakan flexbox untuk menyusun elemen-elemen */
+  align-items: center; /* Posisikan elemen secara vertikal di tengah */
+  justify-content: space-between; /* Memastikan elemen-elemen berada pada ujung kiri dan kanan */
+  padding: 30px; /* Berikan sedikit padding di sekitar konten */
+}
+
+.Title-logo {
+  width: 150px;
+  position: absolute; 
+  top: 2vh; /* Jarak dari atas dalam satuan viewport height (vh) */
+  right: -33vw; /* Jarak dari kanan dalam satuan viewport width (vw) */
+}
+
+
+.Title-search {
+  font-size: 24px;
+  font-weight: bold;
+  width: 475px;
+
+}
+
+.Title-page {
+  padding: 0px;
+}
+
+.Movie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.Movie-title {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.Movie-details .Movie-vote {
+  font-style: italic;
+}
+
+.Movie-image-wrapper {
+  position: relative;
+}
+
+.Movie-image-wrapper:hover .Movie-overlay {
+  opacity: 100; /* Mengatur opacity menjadi 1 saat Movie-image-wrapper dihover */
+}
+
+.Movie-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Warna latar belakang hitam transparan */
+  opacity: 0; /* Mulai dengan opacity 0, sehingga tidak terlihat */
+  transition: opacity 0.3s ease; /* Efek transisi untuk membuatnya muncul dengan mulus */
+}
+
+.Movie-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.Movie-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Agar gambar mengisi sepenuhnya wadah */
+  transition: transform 0.3s ease;  /* Tambahkan transisi untuk efek yang lebih halus */
+}
+
+.Movie-image:hover {
+  transform: scale(1.1);  /* Memperbesar gambar sedikit */
+}
+
+.Movie-details {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) translateY(-50%);
+  color: white;
+}
+
+/* Modal */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 60px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+.modal-content, #caption {  
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+@keyframes zoomOut {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.movie-detail-container {
+  animation: zoomOut 0.5s ease;
+}
