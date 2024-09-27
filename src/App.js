@@ -6,19 +6,19 @@ import {
   searchMovie,
   getUpcomingMovies,
   getMovieGenres,
-} from "./api"; // Pastikan getMovieGenres diimpor
+} from "./api"; // Pastikan semua fungsi yang diimpor tersedia
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
-import MovieDetail from "./Movie-Detail";
+import MovieDetail from "./MovieDetail"; // Pastikan nama file sudah benar
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import logo from "./images/logo.png";
-import Autocomplete from "@mui/material/Autocomplete"; // Import Autocomplete
+import Autocomplete from "@mui/material/Autocomplete";
 
 const App = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [setSearchQuery] = useState("");
-  const [genres, setGenres] = useState([]); // State untuk genre
+  const [searchQuery, setSearchQuery] = useState(""); // Ubah menjadi camelCase
+  const [genres, setGenres] = useState([]);
   const popularMovieContainerRef = useRef(null);
   const upcomingMovieContainerRef = useRef(null);
 
@@ -32,11 +32,15 @@ const App = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const popularResult = await getMovieList();
-      setPopularMovies(popularResult || []);
+      try {
+        const popularResult = await getMovieList();
+        setPopularMovies(popularResult || []);
 
-      const upcomingResult = await getUpcomingMovies();
-      setUpcomingMovies(upcomingResult || []);
+        const upcomingResult = await getUpcomingMovies();
+        setUpcomingMovies(upcomingResult || []);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
     };
 
     fetchMovies();
@@ -75,8 +79,8 @@ const App = () => {
       <Card
         variant="outlined"
         className="Movie-wrapper"
-        key={movie.id} // Use movie.id as key instead of index
-        sx={{ width: 250 }} // Changed to match the styling
+        key={movie.id}
+        sx={{ width: 250 }}
       >
         <Link to={`/movie/${movie.id}`}>
           <div className="Movie-image-wrapper">
@@ -97,7 +101,7 @@ const App = () => {
   const scrollMovies = (containerRef, direction) => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
-        left: direction * 300, // Move left or right based on direction
+        left: direction * 300,
         behavior: "smooth",
       });
     }
@@ -115,14 +119,15 @@ const App = () => {
               <Link to="/" className="Nav-link">
                 Home
               </Link>
-              {/* Combo box genre di sebelah kanan Home */}
               <Autocomplete
-                options={genres} // Gunakan daftar genre
-                getOptionLabel={(option) => option.name} // Ambil nama genre
-                onChange={(event, value) => {
-                  // Lakukan pencarian berdasarkan genre yang dipilih
+                options={genres}
+                getOptionLabel={(option) => option.name}
+                onChange={async (event, value) => {
                   if (value) {
-                    search(value.name); // Misalkan Anda ingin melakukan pencarian berdasarkan nama genre
+                    search(value.name);
+                  } else {
+                    const result = await getMovieList();
+                    setPopularMovies(result || []);
                   }
                 }}
                 renderInput={(params) => (
@@ -133,12 +138,12 @@ const App = () => {
                     InputProps={{
                       ...params.InputProps,
                       style: {
-                        backgroundColor: "#ffffff", // Ubah latar belakang menjadi putih
+                        backgroundColor: "#ffffff",
                       },
                     }}
                   />
                 )}
-                style={{ width: 200, marginLeft: "20px" }} // Ukuran combo box dan margin kiri
+                style={{ width: 200, marginLeft: "20px" }}
               />
             </nav>
           </div>
@@ -185,13 +190,13 @@ const App = () => {
                       className="Scroll-button left"
                       onClick={() => scrollMovies(popularMovieContainerRef, -1)}
                     >
-                      &lt; {/* Tombol Kiri */}
+                      &lt;
                     </button>
                     <button
                       className="Scroll-button right"
                       onClick={() => scrollMovies(popularMovieContainerRef, 1)}
                     >
-                      &gt; {/* Tombol Kanan */}
+                      &gt;
                     </button>
                   </div>
                   <div
@@ -218,13 +223,13 @@ const App = () => {
                         scrollMovies(upcomingMovieContainerRef, -1)
                       }
                     >
-                      &lt; {/* Tombol Kiri */}
+                      &lt;
                     </button>
                     <button
                       className="Scroll-button right"
                       onClick={() => scrollMovies(upcomingMovieContainerRef, 1)}
                     >
-                      &gt; {/* Tombol Kanan */}
+                      &gt;
                     </button>
                   </div>
                   <div
