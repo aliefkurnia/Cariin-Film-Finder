@@ -170,3 +170,18 @@
 .cast::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.2); /* Warna latar belakang scrollbar */
 }
+
+.watch-trailer-button {
+  margin-left: 10px; /* Memberi jarak antara rating dan tombol */
+  padding: 6px 12px; /* Padding untuk tombol */
+  background-color: #ff4081; /* Warna latar belakang */
+  color: white; /* Warna teks */
+  border: none; /* Menghapus border */
+  border-radius: 4px; /* Sudut yang membulat */
+  cursor: pointer; /* Menunjukkan bahwa tombol bisa diklik */
+  transition: background-color 0.3s; /* Transisi untuk efek hover */
+}
+
+.watch-trailer-button:hover {
+  background-color: #e91e63; /* Warna saat hover */
+}

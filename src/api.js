@@ -101,3 +101,21 @@ export const getMovieCast = async (movieId) => {
     throw error; // Tangani kesalahan lebih lanjut sesuai kebutuhan
   }
 };
+
+export const getMovieVideos = async (movieId) => {
+  try {
+    const response = await axios.get(
+      `${baseUrl}/movie/${movieId}/videos?language=en-US`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_APITOKEN}`, // Pastikan token ini valid
+          accept: "application/json",
+        },
+      }
+    );
+    return response.data.results; // Mengembalikan daftar video
+  } catch (error) {
+    console.error("Error fetching movie videos:", error);
+    throw error; // Tangani kesalahan lebih lanjut sesuai kebutuhan
+  }
+};

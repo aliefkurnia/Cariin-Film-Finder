@@ -17,7 +17,7 @@ import Autocomplete from "@mui/material/Autocomplete"; // Import Autocomplete
 const App = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [setSearchQuery] = useState("");
   const [genres, setGenres] = useState([]); // State untuk genre
   const popularMovieContainerRef = useRef(null);
   const upcomingMovieContainerRef = useRef(null);

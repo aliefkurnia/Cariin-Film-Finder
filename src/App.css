@@ -56,6 +56,7 @@ h2 {
   text-decoration: none; /* Hapus garis bawah pada link */
   font-size: 18px; /* Ukuran font */
   margin-right: 20px; /* Jarak antara link */
+  cursor: pointer;
 }
 
 /* Autocomplete box */
@@ -95,7 +96,6 @@ h2 {
 .Movie-container {
   display: flex;
   overflow-x: auto; /* Enable horizontal scrolling */
-  padding: 10px 0; /* Padding for button space */
 }
 
 /* Hide scrollbar for webkit browsers */
@@ -115,6 +115,8 @@ h2 {
 .Movie-image-wrapper {
   position: relative;
   overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 .Movie-image {
