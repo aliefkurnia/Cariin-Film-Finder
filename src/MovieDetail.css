@@ -1,9 +1,10 @@
 .movie-detail {
   color: #fff;
   position: relative;
-  min-height: 60vh; /* Sesuaikan tinggi minimum sesuai kebutuhan */
+  min-height: 100vh; /* Pastikan cukup tinggi untuk menampung semua konten */
   width: 100%;
   padding: 0;
+  background-color: #121212; /* Latar belakang gelap untuk keseluruhan halaman */
 }
 
 .backdrop {
@@ -12,46 +13,160 @@
   background-size: cover;
   background-position: center;
   position: relative;
+  filter: brightness(
+    0.8
+  ); /* Menambahkan efek gelap untuk membuat teks lebih terbaca */
+}
+
+.header-content {
+  padding: 20px; /* Spasi di sekitar header */
+  background-color: rgba(0, 0, 0, 0.8); /* Latar belakang gelap untuk header */
+  border-bottom: 1px solid #fff; /* Garis bawah untuk pemisah visual */
 }
 
 .content {
   display: flex;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
-  margin: 0;
-  border-radius: 0;
-  align-items: center;
+  padding: 15px; /* Mengurangi padding di dalam konten */
+  margin-top: -30px; /* Menghindari tumpang tindih dengan header */
+  z-index: 1; /* Pastikan konten berada di atas backdrop */
 }
 
 .poster-container {
-  flex: 1;
-  max-width: 150px; /* Mengatur lebar maksimum poster */
+  max-width: 200px; /* Mengatur lebar maksimum poster */
+  flex-shrink: 0; /* Mencegah kontainer poster menyusut */
 }
 
 .poster {
-  width: 150%; /* Mengatur lebar poster 20% dari kontainer */
+  width: 100%; /* Pastikan poster mengisi kontainer sepenuhnya */
   border-radius: 10px;
   object-fit: cover;
 }
 
 .details {
-  flex: 2;
   padding-left: 20px;
+  flex: 1; /* Pastikan detail mengisi sisa ruang */
+}
+
+.details h1 {
+  font-size: 2.5em; /* Ukuran judul lebih besar */
+  margin-bottom: 10px; /* Spasi di bawah judul */
+  text-align: start;
+}
+
+.details p {
+  margin: 5px 0; /* Spasi antar paragraf */
+  text-align: start;
 }
 
 .back-button {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Transparansi sedikit lebih tinggi */
   color: #000;
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
   cursor: pointer;
   font-size: 1em;
+  z-index: 10; /* Memastikan tombol kembali tetap di atas elemen lain */
+  transition: background-color 0.3s; /* Transisi halus untuk hover */
 }
 
 .back-button:hover {
   background-color: rgba(255, 255, 255, 1);
+}
+.info-container {
+  display: flex; /* Mengatur kedua section bersebelahan */
+  justify-content: space-between; /* Spasi antar section */
+  margin: 20px 0; /* Margin atas dan bawah */
+}
+
+.additional-info {
+  padding: 20px;
+  border-radius: 8px; /* Radius sudut untuk informasi tambahan */
+  flex: 0 0 25%; /* Mengatur lebar section menjadi 25% */
+  margin: 0 10px; /* Margin di antara section */
+  min-width: 150px; /* Menjaga lebar minimum agar tidak terlalu kecil */
+  max-height: 400px; /* Batas tinggi maksimum untuk section */
+  overflow-y: hidden; /* Sembunyikan overflow vertikal */
+}
+.additional-info h2,
+.additional-info p,
+.additional-info h3 {
+  text-align: left; /* Atur teks menjadi rata kiri */
+  margin: 5px 0; /* Spasi antar elemen */
+}
+
+.additional-info ul {
+  list-style-type: disc; /* Bullet point */
+  padding-left: 20px; /* Padding untuk penempatan yang lebih baik */
+  text-align: left; /* Atur teks menjadi rata kiri */
+}
+
+.cast {
+  padding: 20px; /* Spasi di sekitar section cast */
+  border-radius: 8px; /* Radius sudut untuk informasi tambahan */
+  flex: 1; /* Mengatur lebar section cast menjadi sisa ruang */
+  margin: 0 10px; /* Margin di antara section */
+  max-height: 550px; /* Batas tinggi maksimum untuk section */
+  overflow-y: hidden; /* Sembunyikan overflow vertikal */
+}
+
+.cast-cards {
+  display: flex;
+  flex-wrap: nowrap; /* Mencegah pembungkusan untuk overflow horizontal */
+}
+
+.cast-card {
+  background-color: #1e1e1e; /* Warna latar belakang untuk kartu cast */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Meningkatkan efek bayangan */
+  margin: 5px; /* Spasi antar kartu */
+  padding: 15px;
+  width: 180px; /* Lebar kartu yang lebih lebar untuk menghindari wrap */
+  text-align: center;
+  transition: transform 0.2s; /* Transisi halus untuk hover */
+}
+
+.cast-photo {
+  border-radius: 4px;
+  width: 100%; /* Menyesuaikan lebar gambar dengan kartu */
+  height: 220px; /* Menetapkan tinggi tetap untuk semua foto */
+  object-fit: cover; /* Memastikan gambar terpotong dengan proporsional */
+}
+
+.cast-card h3 {
+  margin: 10px 0 5px; /* Spasi di atas dan bawah nama pemeran */
+  font-size: 1.2em; /* Ukuran font nama */
+  white-space: nowrap; /* Mencegah pembungkusan nama */
+  overflow: hidden; /* Sembunyikan overflow */
+  text-overflow: ellipsis; /* Menampilkan ellipsis jika nama terlalu panjang */
+}
+
+.cast-card p {
+  margin: 5px 0; /* Spasi antar paragraf di dalam kartu */
+  font-size: 0.9em; /* Ukuran font untuk karakter dan popularitas */
+  text-align: start;
+}
+/* Untuk Webkit (Chrome, Safari) */
+.additional-info::-webkit-scrollbar,
+.cast::-webkit-scrollbar {
+  width: 5px; /* Lebar scrollbar */
+}
+
+.additional-info::-webkit-scrollbar-thumb,
+.cast::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5); /* Warna scrollbar */
+  border-radius: 10px; /* Sudut melengkung */
+}
+
+.additional-info::-webkit-scrollbar-track,
+.cast::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2); /* Warna latar belakang scrollbar */
 }

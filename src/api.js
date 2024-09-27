@@ -82,3 +82,22 @@ export const getMovieGenres = async () => {
     throw error; // Tangani kesalahan lebih lanjut sesuai kebutuhan
   }
 };
+
+// Tambahkan fungsi untuk mendapatkan daftar pemeran film
+export const getMovieCast = async (movieId) => {
+  try {
+    const response = await axios.get(
+      `${baseUrl}/movie/${movieId}/credits?language=en-US`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_APITOKEN}`, // Pastikan token ini valid
+          accept: "application/json",
+        },
+      }
+    );
+    return response.data.cast.slice(0, 10); // Mengembalikan hanya 10 pemeran
+  } catch (error) {
+    console.error("Error fetching movie cast:", error);
+    throw error; // Tangani kesalahan lebih lanjut sesuai kebutuhan
+  }
+};
