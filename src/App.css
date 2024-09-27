@@ -1,172 +1,237 @@
+/* Global Styling */
+* {
+  box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: #121212; /* Dark background */
+  color: #dad3be; /* Light text color */
+}
+h2 {
+  text-align: left;
+}
+/* App Container */
 .App {
   text-align: center;
-}
-
-.App-header {
-  background-color: #000000;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #dad3be;
+  justify-content: space-between;
 }
 
+/* Header Styling */
+.App-header {
+  background-color: #1e1e1e; /* Darker header background */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Shadow effect for depth */
+  padding: 15px 30px; /* Larger padding for header */
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Set the position at the top */
+  z-index: 1000; /* Make sure it stays above other content */
+}
+
+/* Header Container */
 .Header-container {
-  position: relative; /* Set the container as a reference for absolute positioning */
-  display: flex; /* Menggunakan flexbox untuk menyusun elemen-elemen */
-  align-items: center; /* Posisikan elemen secara vertikal di tengah */
-  justify-content: space-between; /* Memastikan elemen-elemen berada pada ujung kiri dan kanan */
-  padding: 30px; /* Berikan sedikit padding di sekitar konten */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: space-between; /* Space between logo and combo box */
+  width: 95vw;
+  max-width: 1200px; /* Max width for header */
+  margin: 0 auto; /* Center header */
 }
 
+/* Title Logo */
 .Title-logo {
-  width: 150px;
-  position: absolute; 
-  top: 2vh; /* Jarak dari atas dalam satuan viewport height (vh) */
-  right: -33vw; /* Jarak dari kanan dalam satuan viewport width (vw) */
+  width: 125px; /* Logo width */
+}
+/* Nav Menu Styling */
+.Nav-menu {
+  display: flex;
+  align-items: center; /* Rata tengah secara vertikal */
+  justify-content: space-between; /* Jarak antara elemen di kiri dan kanan */
+  padding: 10px 15px; /* Padding untuk nav menu */
+  background-color: #1e1e1e; /* Warna latar belakang menu */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Efek bayangan untuk kedalaman */
 }
 
-
-.Title-search {
-  font-size: 24px;
-  font-weight: bold;
-  width: 475px;
-
+.Nav-link {
+  color: #ffffff; /* Warna teks putih */
+  text-decoration: none; /* Hapus garis bawah pada link */
+  font-size: 18px; /* Ukuran font */
+  margin-right: 20px; /* Jarak antara link */
 }
 
-.Title-page {
-  padding: 0px;
+/* Autocomplete box */
+.Autocomplete {
+  width: 300px; /* Ukuran untuk combo box */
 }
 
+/* Combo Box Styling */
+.Combo-box {
+  background-color: #ffffff; /* White background */
+  border: none; /* Remove border */
+  border-radius: 25px; /* Rounded corners */
+  color: #000000; /* Black text for contrast */
+  padding: 10px 20px; /* Padding for combo box */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s ease; /* Transition on hover */
+  cursor: pointer; /* Hand cursor on hover */
+  margin-left: 15px; /* Space between logo and combo box */
+}
+
+/* Hover effect for combo box */
+.Combo-box:hover {
+  background-color: #f0f0f0; /* Lighter background on hover */
+}
+
+/* Focus effect for combo box */
+.Combo-box:focus {
+  outline: none; /* Remove outline when focused */
+}
+
+/* Movie Section Styling */
+.Movie-section {
+  position: relative; /* For absolute positioning of navigation buttons */
+}
+
+/* Movie Container Styling */
 .Movie-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding: 10px 0; /* Padding for button space */
 }
 
-
-.Movie-title {
-  margin-top: 10px;
-  font-size: large;
-  font-weight: bold;
+/* Hide scrollbar for webkit browsers */
+.Movie-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
 }
 
-.Movie-details .Movie-vote {
-  font-style: italic;
+/* Movie Wrapper */
+.Movie-wrapper {
+  margin-right: 10px; /* Space between cards */
+  flex: 0 0 auto; /* Prevent flex items from growing */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  overflow: hidden; /* Prevent overflow of the image */
 }
 
+/* Prevent whitespace below images */
 .Movie-image-wrapper {
   position: relative;
+  overflow: hidden;
 }
 
-.Movie-image-wrapper:hover .Movie-overlay {
-  opacity: 100; /* Mengatur opacity menjadi 1 saat Movie-image-wrapper dihover */
+.Movie-image {
+  width: 100%;
+  height: 100%; /* Full height for the image */
+  object-fit: cover; /* Cover image without distortion */
+  transition: transform 0.3s ease; /* Transition for hover effect */
 }
 
+.Movie-image-wrapper:hover .Movie-image {
+  transform: scale(1.1); /* Zoom effect on hover */
+}
+
+/* Overlay for movie details */
 .Movie-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Warna latar belakang hitam transparan */
-  opacity: 0; /* Mulai dengan opacity 0, sehingga tidak terlihat */
-  transition: opacity 0.3s ease; /* Efek transisi untuk membuatnya muncul dengan mulus */
+  background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease; /* Transition for opacity */
+}
+
+.Movie-wrapper:hover .Movie-overlay {
+  opacity: 1; /* Show overlay on hover */
 }
 
 .Movie-title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+  font-size: 1.5rem; /* Adjust font size for title */
   font-weight: bold;
+  color: #ffffff; /* White text color */
   text-align: center;
+  padding: 10px; /* Padding for title */
+  margin: 0; /* Remove margin from title */
 }
 
-
-.Movie-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Agar gambar mengisi sepenuhnya wadah */
-  transition: transform 0.3s ease;  /* Tambahkan transisi untuk efek yang lebih halus */
+/* Search Box Styling */
+.Search-container {
+  display: flex;
+  justify-content: center; /* Center the search box */
+  margin: 20px 0; /* Vertical spacing */
 }
 
-.Movie-image:hover {
-  transform: scale(1.1);  /* Memperbesar gambar sedikit */
+.Title-search {
+  width: 100%; /* Full width */
+  max-width: 40vh; /* Max width for the search box */
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  border-radius: 25px; /* Rounded corners */
+  color: white; /* White text */
+  margin-top: 10px;
+  padding: 10px; /* Padding for search input */
+  border: none; /* Remove border */
 }
 
-.Movie-details {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%) translateY(-50%);
-  color: white;
+/* Footer Styling */
+.App-footer {
+  background-color: #000000; /* Footer background color */
+  padding: 20px 0;
 }
 
-/* Modal */
-.modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
-  padding-top: 60px; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.9); 
+/* Scroll Buttons Styling */
+.Scroll-button {
+  border-radius: 10px; /* Rounded corners */
+  color: rgb(0, 0, 0); /* Black text color */
+  font-size: 20px; /* Font size */
+  cursor: pointer; /* Hand cursor on hover */
+  padding: 5px; /* Padding for button */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transition on hover */
 }
 
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
+/* Hover effect for scroll buttons */
+.Scroll-button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Lighter background on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
-.modal-content, #caption {  
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
-}
-
-/* Close Button */
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-@keyframes zoomOut {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Movie-wrapper {
+    width: 120px; /* Width for smaller devices */
+    margin-right: 5px; /* Reduce margin between cards */
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  .Title-search {
+    width: 80%; /* Responsive width for search box */
+    max-width: none; /* Remove max width on mobile */
+  }
+
+  .Scroll-button {
+    font-size: 18px; /* Font size for smaller devices */
+  }
+
+  /* Header Responsive Design */
+  .Header-container {
+    flex-direction: column; /* Stack vertically for smaller screens */
+    align-items: center; /* Center elements */
+  }
+
+  .Combo-box {
+    width: 100%; /* Full width for combo box on small devices */
+    max-width: 300px; /* Max width for combo box */
   }
 }
 
-.movie-detail-container {
-  animation: zoomOut 0.5s ease;
+/* Extra Responsive Design for larger screens */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .Movie-wrapper {
+    width: 180px; /* Width for medium devices */
+  }
+  .Title-search {
+    width: 60%; /* Responsive width for search box */
+  }
 }
